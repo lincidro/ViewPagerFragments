@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return FirstFragment.newInstance(0,"Page #1");
+                    return FirstFragment.newInstance(0,"Página #1");
                 case 1:
-                    return FirstFragment.newInstance(1,"Page #2");
+                    return FirstFragment.newInstance(1,"Página #2");
                 case 2:
-                    return FirstFragment.newInstance(2,"Page #3");
+                    return FirstFragment.newInstance(2,"Página #3");
                 default:
                     return null;
             }
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Página: "+super.getPageTitle(position);
+            return "Página: "+position;
         }
     }
 }
