@@ -1,60 +1,48 @@
 package com.eduardo.viewpagerfragments;
 
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.eduardo.viewpagerfragments.Fragments.FirstFragment;
+import com.eduardo.viewpagerfragments.Fragments.Adapter.MyPageAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     FragmentPagerAdapter fragmentPagerAdapter;
     ViewPager viewPager;
+    Button btnPrevious;
+    Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewPager = findViewById(R.id.vpPager);
-        fragmentPagerAdapter = new MyPageAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(fragmentPagerAdapter);
+
+        initXML();
+        setAdapter();
 
     }
 
-    public static class MyPageAdapter extends FragmentPagerAdapter{
+    void initXML(){
+        viewPager = findViewById(R.id.vpPager);
+        btnPrevious = findViewById(R.id.btnPrevious);
+        btnNext = findViewById(R.id.btnNext);
 
-        private static int NUM_ITEMS = 3;
+        btnPrevious.setOnClickListener(this);
+        btnNext.setOnClickListener(this);
+    }
 
-        public MyPageAdapter(FragmentManager fm) {
-            super(fm);
-        }
+    void setAdapter(){
+        fragmentPagerAdapter = new MyPageAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(fragmentPagerAdapter);
+    }
 
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
 
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return FirstFragment.newInstance(0,"Página #1");
-                case 1:
-                    return FirstFragment.newInstance(1,"Página #2");
-                case 2:
-                    return FirstFragment.newInstance(2,"Página #3");
-                default:
-                    return null;
-            }
-        }
+    @Override
+    public void onClick(View v) {
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return "Página: "+position;
-        }
     }
 }
